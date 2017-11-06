@@ -1,1 +1,3 @@
-abcdef
+Our topic is to compare immunization rates for 7th grade students in different schools in California. We want to look at the percentages of reasons children do not get immunizations. 
+In 2016, there was a bill passed stating that personal belief exemptions are no longer valid for children to not get immunized, thus they must receive immunizations. We expect to see an increase in 2016 vaccinations,
+so we will be exploring trends in rates. We will also be comparing rates of immunizations before the bill passed in public and private schools and after the bill passed between public and private schools. Our initial data will be gathered from HealthData.gov.
