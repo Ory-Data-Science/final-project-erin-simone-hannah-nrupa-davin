@@ -1,0 +1,8 @@
+
+
+filterdata <- schooldata %>% filter(REPORTED == "Y")
+
+group_by(filterdata, CATEGORY) %>% summarize(sum = sum(COUNT))
+
+group_by(filterdata, CATEGORY, COUNTY) %>% summarize(sum = sum(COUNT))
+
