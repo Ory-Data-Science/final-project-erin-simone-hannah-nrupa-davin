@@ -1,0 +1,8 @@
+command to compare percentages in reasons as to why children are not getting immunizations (for academic years: 2013-2014, 2014-2015, 2015-2016, 2016-2017):
+
+filterdata <- schooldata %>% filter(REPORTED == "Y")
+
+group_by(filterdata, CATEGORY) %>% summarize(sum = sum(COUNT))
+
+group_by(filterdata, CATEGORY, COUNTY) %>% summarize(sum = sum(COUNT))
+
