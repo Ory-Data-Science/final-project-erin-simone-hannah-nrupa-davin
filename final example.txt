@@ -1,3 +1,13 @@
 Our topic is to compare immunization rates for 7th grade students in different schools in California. We want to look at the percentages of reasons children do not get immunizations. 
 In 2016, there was a bill passed stating that personal belief exemptions are no longer valid for children to not get immunized, thus they must receive immunizations. We expect to see an increase in 2016 vaccinations,
 so we will be exploring trends in rates. We will also be comparing rates of immunizations before the bill passed in public and private schools and after the bill passed between public and private schools. Our initial data will be gathered from HealthData.gov.
+
+
+After working through a few in class activities for this project, we decided to simplifiy/recreate our main questions. 
+
+We are looking at immunizations in the state of California, mainly the 7th grade enrollment throughout the entire state. 
+In 2016, the bill SB277 was passed, which removes personal beliefs (religious and philisophical) as a reason for being exempt from vaccination. If they are not exempt medically from vaccination, then they will not be able to attend school. 
+Was there a change, specifically a jump in the amount of children that were not vaccinated for medical reasons? 
+Did the total number of unvaccinated children stay relatively the same or drastically drop?
+So, the big picture includes compairing the number of reasons to deny vaccination before and after the bill. 
+We are anticipating there to be close to no values for religous and philosphical reasons after 2016, but are curious to see if those people were able to get a medical exemption for their children, so that they could attend school.
