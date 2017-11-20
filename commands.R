@@ -1,0 +1,13 @@
+command to compare sum of all students in California that did not get immunizations for a certain reason:
+
+group_by(filterdata, CATEGORY) %>% summarize(sum = sum(COUNT))
+
+command to sum of students by county
+
+filterdata <- schooldata %>% filter(REPORTED == "Y")
+
+group_by(filterdata, CATEGORY) %>% summarize(sum = sum(COUNT))
+
+group_by(filterdata, CATEGORY, COUNTY) %>% summarize(sum = sum(COUNT))
+
+filterdata <- read.csv("schoolimmunizationseventhgrade2016-")

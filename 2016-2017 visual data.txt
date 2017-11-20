@@ -1,0 +1,9 @@
+filterdata <- read.csv("schoolimmunizationseventhgrade2016-17annotation.csv")
+
+filterdata$COUNT <- as.numeric(filterdata$COUNT)
+
+filterdata <- group_by(filterdata, CATEGORY) %>% summarize(sum = sum(COUNT))
+
+ggplot(data = filterdata , aes(x= CATEGORY, y=sum)) + geom_point() + labs ( x = "Category", y = "sum")
+
+ggplot(data = filterdata, aes(x = CATEGORY, y=sum)) + geom_col() + labs (x = "Category", y= "Total Number of Students")
