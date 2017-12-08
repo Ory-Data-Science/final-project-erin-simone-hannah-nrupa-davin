@@ -25,3 +25,47 @@ year1314 <- function() {
   
 }
 year1314()
+
+year1415 <- function() {
+  
+  data1415 <- data%>%
+    filter(!is.na(data$COUNT), SCHOOL.YEAR == '2014-2015')%>%
+    filter(CATEGORY != 'Up-To-Date')
+
+  data1415$COUNT <- as.numeric(data1415$COUNT)
+  
+  filtered1415 <- data1415%>%
+    group_by(CATEGORY)%>%
+    summarize(STUDENTS.EXEMPTED = sum(COUNT))
+
+  filtered1415$CATEGORY <- c('Practitioner Counseled', 'Medical', 'Personal Beliefs', 'Religion')
+    
+  ggplot(filtered1415, aes(x = CATEGORY, y = STUDENTS.EXEMPTED)) +
+    geom_col(fill = "#9933cc", width = 0.4 ) +
+    labs(x = 'Category', y = 'Students Exempted') +
+    ggtitle('Reasons for Students Not Being Fully Vaccinated 14-15')
+  
+}
+year1415()
+
+year1516 <- function() {
+  
+  data1516 <- data%>%
+    filter(!is.na(data$COUNT), SCHOOL.YEAR == '2015-2016')%>%
+    filter(CATEGORY != 'Up-To-Date')
+  
+  data1516$COUNT <- as.numeric(data1516$COUNT)
+  
+  filtered1516 <- data1516%>%
+    group_by(CATEGORY)%>%
+    summarize(STUDENTS.EXEMPTED = sum(COUNT))
+  
+  filtered1516$CATEGORY <- c('Practitioner Counseled', 'Medical', 'Personal Beliefs', 'Religion', 'Overdue')
+  
+  ggplot(filtered1516, aes(x = CATEGORY, y = STUDENTS.EXEMPTED)) +
+    geom_col(fill= "#339999", width= 0.4) +
+    labs(x = 'Category', y = 'Students Exempted') +
+    ggtitle('Reasons for Students Not Being Fully Vaccinated 15-16')
+  
+}
+year1516()
