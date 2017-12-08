@@ -4,6 +4,7 @@ setwd('~/github/final-project-erin-simone-hannah-nrupa-davin/')
 data <- read_csv('7thgrade2013201420152016.csv')
 data <- data %>% rename_all(make.names)
 
+# picks out data for school year 13-14 and removes data reported as N/A
 year1314 <- function() {
   
   data1314 <- data%>%
@@ -12,42 +13,53 @@ year1314 <- function() {
   
   data1314$COUNT <- as.numeric(data1314$COUNT)
   
+  #adds number of students in each category
+  
   filtered1314 <- data1314%>%
     group_by(CATEGORY)%>%
     summarize(STUDENTS.EXEMPTED = sum(COUNT))
   
+  #re-naming categories
+  
   filtered1314$CATEGORY <- c('Practitioner Counseled', 'Medical', 'Personal Beliefs', 'Religion')
   
+  #creates visual (bar graph) of data
   ggplot(filtered1314, aes(x = CATEGORY, y = STUDENTS.EXEMPTED)) +
-    geom_col(fill = "gold", width = 0.3) +
+    geom_col() +
     labs(x = 'Category', y = 'Students Exempted') +
     ggtitle('Reasons for Students Not Being Fully Vaccinated 13-14')
   
 }
-year1314()
 
+# picks out data for school year 14-15 and removes data reported as N/A
 year1415 <- function() {
   
   data1415 <- data%>%
     filter(!is.na(data$COUNT), SCHOOL.YEAR == '2014-2015')%>%
     filter(CATEGORY != 'Up-To-Date')
-
+  
   data1415$COUNT <- as.numeric(data1415$COUNT)
+  
+  #adds number of students in each category
   
   filtered1415 <- data1415%>%
     group_by(CATEGORY)%>%
     summarize(STUDENTS.EXEMPTED = sum(COUNT))
+  
+  #re-naming categories
 
   filtered1415$CATEGORY <- c('Practitioner Counseled', 'Medical', 'Personal Beliefs', 'Religion')
-    
+  
+  #creates visual (bar graph) of data
+  
   ggplot(filtered1415, aes(x = CATEGORY, y = STUDENTS.EXEMPTED)) +
-    geom_col(fill = "#9933cc", width = 0.4 ) +
+    geom_col() +
     labs(x = 'Category', y = 'Students Exempted') +
     ggtitle('Reasons for Students Not Being Fully Vaccinated 14-15')
   
 }
-year1415()
 
+# picks out data for school year 15-16 and removes data reported as N/A
 year1516 <- function() {
   
   data1516 <- data%>%
@@ -56,19 +68,25 @@ year1516 <- function() {
   
   data1516$COUNT <- as.numeric(data1516$COUNT)
   
+  #adds number of students in each category
+  
   filtered1516 <- data1516%>%
     group_by(CATEGORY)%>%
     summarize(STUDENTS.EXEMPTED = sum(COUNT))
   
+  #re-naming categories
   filtered1516$CATEGORY <- c('Practitioner Counseled', 'Medical', 'Personal Beliefs', 'Religion', 'Overdue')
   
+  #creates visual (bar graph) of data
+  
   ggplot(filtered1516, aes(x = CATEGORY, y = STUDENTS.EXEMPTED)) +
-    geom_col(fill= "#339999", width= 0.4) +
+    geom_col() +
     labs(x = 'Category', y = 'Students Exempted') +
     ggtitle('Reasons for Students Not Being Fully Vaccinated 15-16')
   
 }
-year1516()
+
+# picks out data for school year 16-17 and removes data reported as N/A
 year1617 <- function() {
 
   data1617 <- read_csv('7thgrade2016-2017with-annotation.csv')
@@ -79,13 +97,35 @@ year1617 <- function() {
   
   data1617$COUNT <- as.numeric(data1617$COUNT)
   
+  #adds number of students in each category
+  
   filtered1617 <- data1617%>%
     group_by(CATEGORY)%>%
     summarize(STUDENTS.EXEMPTED = sum(COUNT))
   
+  #creates visual (bar graph) of data
+  
   ggplot(filtered1617, aes(x = CATEGORY, y = STUDENTS.EXEMPTED)) +
-    geom_col(fill= "#993366", width= 0.4) +
+    geom_col() +
     labs(x = 'Category', y = 'Students Exempted') +
     ggtitle('Reasons for Students Not Being Fully Vaccinated 16-17')
 }
-year1617()
+
+#makes a stack graph, separated by school year, stacked by category
+stackgraph <- function() {
+  
+  data$COUNT <- as.numeric(data$COUNT)
+  
+  graph <- data%>%
+    filter(!is.na(data$COUNT))%>%
+    filter(CATEGORY != 'Up-To-Date')%>%
+    group_by(SCHOOL.YEAR, CATEGORY)%>%
+    summarize(STUDENTS.EXEMPTED = sum(COUNT))
+  
+  ggplot(graph, aes(x = SCHOOL.YEAR, y = STUDENTS.EXEMPTED)) +
+    geom_col(aes(fill = CATEGORY), width = 0.4) +
+    labs(x = 'School Year', y = 'Students Exempted') +
+    ggtitle('Reasons for Students Not Being Fully Vaccinated')
+  
+}
+stackgraph()
