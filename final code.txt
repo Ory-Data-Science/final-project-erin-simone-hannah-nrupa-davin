@@ -69,3 +69,23 @@ year1516 <- function() {
   
 }
 year1516()
+year1617 <- function() {
+
+  data1617 <- read_csv('7thgrade2016-2017with-annotation.csv')
+  
+  data1617 <- data1617%>%
+    filter(!is.na(data1617$COUNT))%>%
+    filter(CATEGORY != 'UP-TO-DATE')
+  
+  data1617$COUNT <- as.numeric(data1617$COUNT)
+  
+  filtered1617 <- data1617%>%
+    group_by(CATEGORY)%>%
+    summarize(STUDENTS.EXEMPTED = sum(COUNT))
+  
+  ggplot(filtered1617, aes(x = CATEGORY, y = STUDENTS.EXEMPTED)) +
+    geom_col(fill= "#993366", width= 0.4) +
+    labs(x = 'Category', y = 'Students Exempted') +
+    ggtitle('Reasons for Students Not Being Fully Vaccinated 16-17')
+}
+year1617()
