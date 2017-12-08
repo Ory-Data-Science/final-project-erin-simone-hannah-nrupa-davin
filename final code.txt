@@ -1,0 +1,27 @@
+require(tidyverse)
+setwd('~/github/final-project-erin-simone-hannah-nrupa-davin/')
+
+data <- read_csv('7thgrade2013201420152016.csv')
+data <- data %>% rename_all(make.names)
+
+year1314 <- function() {
+  
+  data1314 <- data%>%
+    filter(!is.na(data$COUNT), SCHOOL.YEAR == '2013-2014')%>%
+    filter(CATEGORY != 'Up-To-Date')
+  
+  data1314$COUNT <- as.numeric(data1314$COUNT)
+  
+  filtered1314 <- data1314%>%
+    group_by(CATEGORY)%>%
+    summarize(STUDENTS.EXEMPTED = sum(COUNT))
+  
+  filtered1314$CATEGORY <- c('Practitioner Counseled', 'Medical', 'Personal Beliefs', 'Religion')
+  
+  ggplot(filtered1314, aes(x = CATEGORY, y = STUDENTS.EXEMPTED)) +
+    geom_col(fill = "gold", width = 0.3) +
+    labs(x = 'Category', y = 'Students Exempted') +
+    ggtitle('Reasons for Students Not Being Fully Vaccinated 13-14')
+  
+}
+year1314()
